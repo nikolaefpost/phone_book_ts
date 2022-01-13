@@ -1,25 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Home, {CardVariant} from "./pages/Home";
+import Contacts from "./pages/Contacts";
+import AppRouter from './components/AppRouter';
+import NavBar from "./components/NavBar";
+import { BrowserRouter } from 'react-router-dom';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <div className="App">
+    // {/* <Home*/}
+    // {/*     width='200px'*/}
+    // {/*     height='100px'*/}
+    // {/*     variant={CardVariant.primary}*/}
+    // {/*     onClick={(a)=>console.log(a)}*/}
+    // {/* >*/}
+    // {/*<button>button</button>*/}
+    // {/* </Home>*/}
+    //     <Contacts/>
+    // </div>
+      <BrowserRouter>
+          <div>
+              <NavBar/>
+              <AppRouter/>
+          </div>
+
+      </BrowserRouter>
   );
 }
 
