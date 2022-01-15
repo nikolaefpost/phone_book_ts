@@ -1,8 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from 'reactstrap';
 import {ABOUT_ROUTE, CONTACTS_ROUTE, ERROR_ROUTE, HOME_ROUTE} from "../utils/consts";
 
 const NavBar = () => {
+    const history = useHistory();
     return (
         // <Navbar bg="dark" variant="dark" fixed="top">
         // <div>
@@ -39,24 +41,36 @@ const NavBar = () => {
         <div>
             <Nav tabs >
                 <NavItem>
-                    <NavLink href={HOME_ROUTE}>
+                    <NavLink onClick={()=>{
+                        history.push(HOME_ROUTE)
+                    }} >
                                     HOME
                     </NavLink>
                 </NavItem>
 
                 <NavItem>
-                    <NavLink href={CONTACTS_ROUTE}>
+                    <NavLink
+                        onClick={()=>{
+                            history.push(CONTACTS_ROUTE)
+                        }}
+                    >
                         CONTACTS
                     </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink href={ABOUT_ROUTE}>
+                    <NavLink
+                        onClick={()=>{
+                            history.push(ABOUT_ROUTE)
+                        }}
+                        >
                         ABOUT
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink
-                        href={ERROR_ROUTE}
+                        onClick={()=>{
+                            history.push(ERROR_ROUTE)
+                        }}
                     >
                         ERROR
                     </NavLink>

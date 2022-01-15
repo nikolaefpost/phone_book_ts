@@ -31,3 +31,4 @@ function App() {
 }
 
 export default App;
+// npm i @types/react-redux redux react-redux redux-thunk axios

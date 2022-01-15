@@ -27,3 +27,33 @@ export interface IUser{
     // website: string;
     // company: ICompany
 }
+
+export interface ContactState {
+    contacts: any[];
+    loading: boolean;
+    error: null | string;
+}
+
+export enum ContactActionTypes {
+    FETCH_CONTACTS = 'FETCH_CONTACTS',
+    FETCH_CONTACTS_SUCCESS = 'FETCH_CONTACTS_SUCCESS',
+    FETCH_CONTACTS_ERROR = 'FETCH_CONTACTS_ERROR',
+    DELETE_CONTACTS = 'DELETE_CONTACTS'
+}
+
+export interface FetchContactAction {
+    type: ContactActionTypes.FETCH_CONTACTS;
+}
+export interface FetchContactSuccessAction {
+    type: ContactActionTypes.FETCH_CONTACTS_SUCCESS;
+    payload: any[];
+}
+export interface FetchContactErrorAction {
+    type: ContactActionTypes.FETCH_CONTACTS_ERROR
+    payload: string;
+}
+export interface DeleteContactAction {
+    type: ContactActionTypes.DELETE_CONTACTS
+    payload: number;
+}
+export type ContactAction = FetchContactAction | FetchContactSuccessAction | FetchContactErrorAction | DeleteContactAction
