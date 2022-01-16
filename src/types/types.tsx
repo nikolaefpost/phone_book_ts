@@ -23,13 +23,14 @@ export interface IUser{
     username: string;
     // email: string;
     // address: IAddress
-    phone: string;
+    phone: string| number;
+    img?: string|null|ArrayBuffer;
     // website: string;
     // company: ICompany
 }
 
 export interface ContactState {
-    contacts: any[];
+    contacts: IUser[];
     loading: boolean;
     error: null | string;
 }
@@ -38,7 +39,8 @@ export enum ContactActionTypes {
     FETCH_CONTACTS = 'FETCH_CONTACTS',
     FETCH_CONTACTS_SUCCESS = 'FETCH_CONTACTS_SUCCESS',
     FETCH_CONTACTS_ERROR = 'FETCH_CONTACTS_ERROR',
-    DELETE_CONTACTS = 'DELETE_CONTACTS'
+    DELETE_CONTACTS = 'DELETE_CONTACTS',
+    ADD_CONTACTS = 'ADD_CONTACTS'
 }
 
 export interface FetchContactAction {
@@ -46,7 +48,7 @@ export interface FetchContactAction {
 }
 export interface FetchContactSuccessAction {
     type: ContactActionTypes.FETCH_CONTACTS_SUCCESS;
-    payload: any[];
+    payload: IUser[];
 }
 export interface FetchContactErrorAction {
     type: ContactActionTypes.FETCH_CONTACTS_ERROR
@@ -56,4 +58,9 @@ export interface DeleteContactAction {
     type: ContactActionTypes.DELETE_CONTACTS
     payload: number;
 }
-export type ContactAction = FetchContactAction | FetchContactSuccessAction | FetchContactErrorAction | DeleteContactAction
+export interface AddContactAction {
+    type: ContactActionTypes.ADD_CONTACTS
+    payload :IUser;
+}
+export type ContactAction = FetchContactAction | FetchContactSuccessAction | FetchContactErrorAction |
+    DeleteContactAction | AddContactAction;

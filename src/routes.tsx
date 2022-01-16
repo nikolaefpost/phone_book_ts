@@ -14,7 +14,7 @@ export const routes = [
         Component: Contacts
     },
     {
-        path: ABOUT_ROUTE,
+        path: ABOUT_ROUTE + '/:id',
         Component: About
     },
     {

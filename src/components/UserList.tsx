@@ -4,58 +4,50 @@ import {useDispatch, useSelector} from "react-redux";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {fetchContacts} from "../store/action_creators/contacts";
 import {useActions} from "../hooks/useActions";
+import {useHistory} from "react-router-dom";
+import {ABOUT_ROUTE, CONTACTS_ROUTE} from "../utils/consts";
 interface UserListProps{
     contacts: IUser[]
 }
 
 const UserList: FC<UserListProps> = (contacts) => {
     const dispatch = useDispatch();
-    console.log(contacts)
-    // const contacts = useTypedSelector(state => state.contact)
-    // const {fetchContacts} = useActions()
-    //
-    // useEffect(()=>{
-    //     fetchContacts()
-    // },[])
-    // if (contacts.loading) {
-    //     return <h1>Loading in progress...</h1>
-    // }
-    // if (contacts.error) {
-    //     return <h1>{contacts.error}</h1>
-    // }
+    const history = useHistory();
 
     return (
-        <div>
-            {contacts.contacts.map(user=>
-                <div
-                    key={user.id}
-                    onClick={()=>{
-                        dispatch({type: ContactActionTypes.DELETE_CONTACTS, payload: user.id})
-                    }}
-                >{user.name}</div>
-            )
+        <div className='d-flex justify-content-center'>
+            <div>
+                {contacts.contacts.map(user=>
+                    <figure
+                        key={user.id}
+                        onClick={()=>{
+                            history.push(ABOUT_ROUTE +'/' + user.id)
+                        }}
+                        // onClick={()=>{
+                        //     dispatch({type: ContactActionTypes.DELETE_CONTACTS, payload: user.id})
+                        // }}
+                        className='d-flex justify-content-start align-items-center'
+                    >
+                            <div className='bg-secondary rounded me-3'>
+                                {user.img ? <img className='rounded' src={(user.img).toString()}
+                                      style={{width: '36px', height: '36px'}}/>:
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#f8f9fa"
+                                    className="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path
+                                    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    </svg>}
+                            </div>
 
-            }
+                        <figcaption>{user.name}</figcaption>
+                        <figcaption>{user.username}</figcaption>
+                    </figure>
+                )
+
+                }
+            </div>
         </div>
     );
 };
 
 export default UserList;
 
-
-
-
-// const UserList: FC<UserListProps> = ({users}) => {
-//
-//     return (
-//         <div>
-//             {users.map(user=>
-//                 <div key={user.id}>{user.name}</div>
-//             )
-//
-//             }
-//         </div>
-//     );
-// };
-//
-// export default UserList;

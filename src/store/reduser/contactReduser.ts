@@ -16,6 +16,8 @@ export const ContactReducer = (state=initialState, action: ContactAction):Contac
             return {loading: true, error: action.payload, contacts: []}
         case ContactActionTypes.DELETE_CONTACTS:
             return {loading: false, error: null, contacts: state.contacts.filter(item=>item.id !==action.payload)}
+        case ContactActionTypes.ADD_CONTACTS:
+            return {loading: false, error: null, contacts: [...state.contacts, action.payload]}
         default:
             return  state
     }

@@ -1,5 +1,5 @@
 import {Dispatch} from "redux"
-import {ContactAction, ContactActionTypes} from "../../types/types"
+import {ContactAction, ContactActionTypes, IUser} from "../../types/types"
 import axios from "axios";
 
 export const fetchContacts = () => {
@@ -7,7 +7,7 @@ export const fetchContacts = () => {
 
         try {
             dispatch({type: ContactActionTypes.FETCH_CONTACTS})
-            const response = await axios.get('https://jsonplaceholder.typicode.com/users')
+            const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users')
             dispatch({type: ContactActionTypes.FETCH_CONTACTS_SUCCESS, payload: response.data})
         } catch (e){
             dispatch({
