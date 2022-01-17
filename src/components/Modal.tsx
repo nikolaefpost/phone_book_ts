@@ -1,25 +1,28 @@
 import React, {FC, useState} from 'react';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import FormAddContact from "./FormAddContact";
-import {ContactActionTypes, IUser} from "../types/types";
+import { IUser} from "../types/types";
 import {useDispatch} from "react-redux";
 interface ModalProps{
     id?: number
     fname?: string
     username?: string
-    phone?: number|''
+    phone?: number|string
+    img?: string|null|ArrayBuffer
+    dispatch_type: string
 }
-export  const ModalAdd: FC<ModalProps> = ({id, fname, username, phone}) => {
+export  const ModalAdd: FC<ModalProps> = (props) => {
     const dispatch = useDispatch();
-    const [name, setName] = useState<string>(fname || '')
-    const [surname, setSurname] = useState<string>(username ||'')
-    const [number, setNumber] = useState<number|''>(phone||'')
+    const [name, setName] = useState<string>(props.fname || '')
+    const [surname, setSurname] = useState<string>(props.username ||'')
+    const [number, setNumber] = useState<number|string>(props.phone||0)
     const [foto, setFoto] = useState<string|null|ArrayBuffer>(null)
     const [open, setOpen] = useState<boolean>(false)
-    // console.log(name, surname, number, foto)
+    console.log(open)
+
     const addContact = (contact:IUser): void=>{
 
-        dispatch({type: ContactActionTypes.ADD_CONTACTS, payload: contact})
+        dispatch({type: props.dispatch_type, payload: contact})
         setOpen(false)
     }
     return (
@@ -28,13 +31,10 @@ export  const ModalAdd: FC<ModalProps> = ({id, fname, username, phone}) => {
                 onClick={() => setOpen(true)}
 
             >
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#0d6efd"
-                     className="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                    <path
-                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-                </svg>
+                {props.children}
             </div>
             <Modal
+                centered
                 isOpen ={open}
                 toggle={() => setOpen(false)}
             >
@@ -57,11 +57,11 @@ export  const ModalAdd: FC<ModalProps> = ({id, fname, username, phone}) => {
                         color="primary"
                         onClick={()=>{
                             addContact({
-                                id: (new Date()).getTime(),
+                                id: props.id? props.id : (new Date()).getTime(),
                                 name: name,
                                 username: surname,
                                 phone: number,
-                                img: foto
+                                img: foto?  foto: props.img
                             })
                         }}
                     >

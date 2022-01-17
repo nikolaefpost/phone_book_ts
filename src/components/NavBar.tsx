@@ -1,16 +1,14 @@
-import React, { ReactNode } from 'react';
+import React, { useState} from 'react';
 import { useHistory } from 'react-router-dom';
-import {Collapse, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import {ABOUT_ROUTE, CONTACTS_ROUTE, ERROR_ROUTE, HOME_ROUTE} from "../utils/consts";
+import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Spinner } from 'reactstrap';
+import { CONTACTS_ROUTE, HOME_ROUTE} from "../utils/consts";
 import {useActions} from "../hooks/useActions";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 
 
-function NavbarText(props: { children: ReactNode }) {
-    return null;
-}
-
 const NavBar = () => {
+    const [navbar, setNavbar] = useState(true)
+    console.log(navbar)
     const contacts = useTypedSelector(state => state.contact)
     const history = useHistory();
     const {fetchContacts} = useActions()
@@ -18,13 +16,18 @@ const NavBar = () => {
         fetchContacts()
     }
     if (contacts.loading) {
-        return <h1>Loading in progress...</h1>
+        return( <Spinner
+                    color="secondary"
+                    size=""
+                >
+                    Loading...
+                </Spinner>)
     }
     if (contacts.error) {
         return <h1>{contacts.error}</h1>
     }
     return (
-        <div>
+        <div className=''>
             <Navbar
                 color="dark"
                 container="xl"
@@ -39,11 +42,11 @@ const NavBar = () => {
                                 }}>
                     PHONE BOOK
                 </NavbarBrand>
-                <NavbarToggler onClick={function noRefCheck(){}} />
+                <NavbarToggler onClick={()=>{setNavbar((pre)=>!pre)}} />
                 <Collapse navbar>
                     <Nav
                         className="me-auto"
-                        navbar
+                        navbar={navbar}
                     >
                         <NavItem>
                             <NavLink
@@ -59,55 +62,9 @@ const NavBar = () => {
                         </NavItem>
 
                     </Nav>
-                    <NavbarText>
-                        Simple Text
-                    </NavbarText>
                 </Collapse>
             </Navbar>
         </div>
-        // <div  >
-        //     <Nav
-        //         tabs
-        //         color="dark"
-        //         dark
-        //     >
-        //         <NavItem>
-        //             <NavLink onClick={()=>{
-        //                 history.push(HOME_ROUTE)
-        //             }} >
-        //                             HOME
-        //             </NavLink>
-        //         </NavItem>
-        //
-        //         <NavItem>
-        //             <NavLink
-        //                 onClick={()=>{
-        //                     history.push(CONTACTS_ROUTE)
-        //                 }}
-        //             >
-        //                 CONTACTS
-        //             </NavLink>
-        //         </NavItem>
-        //         <NavItem>
-        //             <NavLink
-        //                 onClick={()=>{
-        //                     history.push(ABOUT_ROUTE)
-        //                 }}
-        //                 >
-        //                 ABOUT
-        //             </NavLink>
-        //         </NavItem>
-        //         <NavItem>
-        //             <NavLink
-        //                 onClick={()=>{
-        //                     history.push(ERROR_ROUTE)
-        //                 }}
-        //             >
-        //                 ERROR
-        //             </NavLink>
-        //         </NavItem>
-        //     </Nav>
-        // </div>
     );
 };
 

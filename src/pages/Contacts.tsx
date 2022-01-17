@@ -1,18 +1,41 @@
 import React, {useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import UserList from "../components/UserList";
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {useActions} from "../hooks/useActions";
 import {ModalAdd} from '../components/Modal'
+import AddButton from "../components/AddButton";
+import {ContactActionTypes} from "../types/types";
+import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
+import Search from "../components/Search";
 
 const Contacts = () => {
+    const storeContacts = useTypedSelector(state => state.contact)
+    const [contacts, setContacts] = useState(storeContacts.contacts)
+    const [search, setSearch] = useState('')
+    console.log(search)
+    useEffect(()=>{
+        setContacts(storeContacts.contacts)
+    },[storeContacts])
+    useEffect(()=>{
+        if(search !== '' ) {
+            setContacts(() => {
+                return storeContacts.contacts.filter((item) => {
+                    const l = item.name.toLowerCase()
+                    return l.search(search) !== -1
+                })
+            })
+        } else setContacts(storeContacts.contacts)
+    },[search])
 
-    const contacts = useTypedSelector(state => state.contact)
 
     return (<>
-        <div className='container mt-2 p-5 h-100' style={{height: '100vh'}}>
-            <UserList contacts={contacts.contacts} />
-            <ModalAdd/>
+        <div className='container mt-2 p-5 ' >
+
+            {!storeContacts.error && <Search
+                search={search}
+                setSearch={setSearch}
+            />}
+            <UserList contacts={contacts} />
+            {!storeContacts.error &&<ModalAdd dispatch_type={ContactActionTypes.ADD_CONTACTS}><AddButton/></ModalAdd>}
         </div>
 
         </>

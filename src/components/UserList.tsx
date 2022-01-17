@@ -1,11 +1,8 @@
-import React, {FC, useEffect, useState} from 'react';
-import {ContactActionTypes, IUser} from "../types/types";
-import {useDispatch, useSelector} from "react-redux";
-import {useTypedSelector} from "../hooks/useTypedSelector";
-import {fetchContacts} from "../store/action_creators/contacts";
-import {useActions} from "../hooks/useActions";
+import React, {FC} from 'react';
+import { IUser} from "../types/types";
+import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {ABOUT_ROUTE, CONTACTS_ROUTE} from "../utils/consts";
+import {ABOUT_ROUTE} from "../utils/consts";
 interface UserListProps{
     contacts: IUser[]
 }
@@ -23,9 +20,6 @@ const UserList: FC<UserListProps> = (contacts) => {
                         onClick={()=>{
                             history.push(ABOUT_ROUTE +'/' + user.id)
                         }}
-                        // onClick={()=>{
-                        //     dispatch({type: ContactActionTypes.DELETE_CONTACTS, payload: user.id})
-                        // }}
                         className='d-flex justify-content-start align-items-center'
                     >
                             <div className='bg-secondary rounded me-3'>

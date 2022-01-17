@@ -10,6 +10,7 @@ export const fetchContacts = () => {
             const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users')
             dispatch({type: ContactActionTypes.FETCH_CONTACTS_SUCCESS, payload: response.data})
         } catch (e){
+            console.log(e)
             dispatch({
                 type: ContactActionTypes.FETCH_CONTACTS_ERROR,
                 payload: 'Contacts not loaded'

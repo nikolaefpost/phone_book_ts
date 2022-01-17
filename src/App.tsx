@@ -21,7 +21,7 @@ function App() {
     //     <Contacts/>
     // </div>
       <BrowserRouter>
-          <div className='h-100 bg-light pt-5' >
+          <div className='h-100 bg-light pt-5 text-center'  >
               <NavBar/>
               <AppRouter/>
           </div>

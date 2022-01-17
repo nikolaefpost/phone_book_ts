@@ -40,7 +40,8 @@ export enum ContactActionTypes {
     FETCH_CONTACTS_SUCCESS = 'FETCH_CONTACTS_SUCCESS',
     FETCH_CONTACTS_ERROR = 'FETCH_CONTACTS_ERROR',
     DELETE_CONTACTS = 'DELETE_CONTACTS',
-    ADD_CONTACTS = 'ADD_CONTACTS'
+    ADD_CONTACTS = 'ADD_CONTACTS',
+    EDIT_CONTACTS= 'EDIT_CONTACTS'
 }
 
 export interface FetchContactAction {
@@ -62,5 +63,9 @@ export interface AddContactAction {
     type: ContactActionTypes.ADD_CONTACTS
     payload :IUser;
 }
+export interface EditContactAction {
+    type: ContactActionTypes.EDIT_CONTACTS
+    payload :IUser;
+}
 export type ContactAction = FetchContactAction | FetchContactSuccessAction | FetchContactErrorAction |
-    DeleteContactAction | AddContactAction;
+    DeleteContactAction | AddContactAction | EditContactAction;

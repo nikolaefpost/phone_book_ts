@@ -5,7 +5,7 @@ interface FormProps{
     setName: (name: string) => void
     surname: string
     setSurname: (surname: string) => void
-    number: number|''
+    number: number|string
     setNumber: (number: number|'') => void
     setFoto: (foto: string|null|ArrayBuffer) => void
 }
@@ -33,10 +33,7 @@ const FormAddContact: FC<FormProps> = ({
        if (Number(e.currentTarget.value)) {
            setNumber(Number(e.currentTarget.value))
            setNovalid(false)
-       }else {
-           setNovalid(true)
-       };
-
+       }else setNovalid(true);
     };
     const onChangeImg = (e: React.FormEvent<HTMLInputElement>): void => {
         if ( e.currentTarget.files == null ) {
@@ -88,7 +85,7 @@ const FormAddContact: FC<FormProps> = ({
                 />
             </FormGroup>
             <FormGroup>
-                <Label for="exampleFile">
+                <Label for="file">
                     Сontact picture
                 </Label>
                 <Input

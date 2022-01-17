@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import logo from '../images/Home_page.png'
 
 import { useHistory } from 'react-router-dom';
 import { Button } from 'reactstrap';
@@ -17,24 +18,10 @@ interface HomeProps {
     onClick?: (word: string)=>void
 }
 
-const Home: FC<HomeProps> = ({
-                                 width,
-                                 height,
-                                 children,
-                                 variant,
-    onClick
-} ) => {
-    const history = useHistory();
-    console.log(variant)
+const Home: React.FC = () => {
     return (
-        <div
-        //     style={{width, height, background: variant === CardVariant.primary? 'grey': "inherit",
-        //     border: variant === CardVariant.outlined? '1px solid lightgrey': 'none'
-        // }}
-        //      onClick={()=>onClick('CLICK')}
-        >
-            {children}HOME
-            <Button onClick={()=> history.push(CONTACTS_ROUTE)}>Contact</Button>
+        <div className='w-100 h-100 bg-secondary d-flex align-items-center justify-content-center'>
+            <h1 className='text-light'>Home page</h1>
         </div>
     );
 };
