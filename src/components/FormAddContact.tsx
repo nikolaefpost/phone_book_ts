@@ -8,6 +8,7 @@ interface FormProps{
     number: number|string
     setNumber: (number: number|'') => void
     setFoto: (foto: string|null|ArrayBuffer) => void
+
 }
 
 const FormAddContact: FC<FormProps> = ({
@@ -17,8 +18,7 @@ const FormAddContact: FC<FormProps> = ({
                                            setSurname,
                                            number,
                                            setNumber,
-                                           setFoto
-
+                                           setFoto,
 }) => {
     const [novalide, setNovalid] = useState<boolean>(false)
 

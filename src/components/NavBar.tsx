@@ -1,14 +1,14 @@
 import React, { useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Spinner } from 'reactstrap';
-import { CONTACTS_ROUTE, HOME_ROUTE} from "../utils/consts";
+import {ABOUT_EMPTY_ROUTE, CONTACTS_ROUTE, ERROR_ROUTE, HOME_ROUTE} from "../utils/consts";
 import {useActions} from "../hooks/useActions";
 import {useTypedSelector} from "../hooks/useTypedSelector";
+import Error from "../pages/Error";
 
 
 const NavBar = () => {
-    const [navbar, setNavbar] = useState(true)
-    console.log(navbar)
+    const [navbar, setNavbar] = useState(false)
     const contacts = useTypedSelector(state => state.contact)
     const history = useHistory();
     const {fetchContacts} = useActions()
@@ -24,7 +24,7 @@ const NavBar = () => {
                 </Spinner>)
     }
     if (contacts.error) {
-        return <h1>{contacts.error}</h1>
+        return <Error/>
     }
     return (
         <div className=''>
@@ -43,10 +43,10 @@ const NavBar = () => {
                     PHONE BOOK
                 </NavbarBrand>
                 <NavbarToggler onClick={()=>{setNavbar((pre)=>!pre)}} />
-                <Collapse navbar>
+                <Collapse navbar isOpen={navbar}>
                     <Nav
                         className="me-auto"
-                        navbar={navbar}
+                        navbar
                     >
                         <NavItem>
                             <NavLink
@@ -56,8 +56,13 @@ const NavBar = () => {
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink onClick={loadContact}>
-                                Load Contact
+                            <NavLink onClick={()=>{history.push(ABOUT_EMPTY_ROUTE)}}>
+                                ABOUT
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink onClick={()=>{history.push(ERROR_ROUTE)}}>
+                                ERROR 404
                             </NavLink>
                         </NavItem>
 

@@ -14,7 +14,7 @@ const Search: FC<FormProps> = ({search, setSearch}) => {
     return (
         <Form>
             <FormGroup row className='align-items-center'>
-                <Col sm={4}>
+                <Col sm={4} className='mb-2 mb-sm-0'>
                     <Button onClick={loadContact}>Load Contacts</Button>
                 </Col>
                 <Col sm={4}>
@@ -32,9 +32,9 @@ const Search: FC<FormProps> = ({search, setSearch}) => {
                     for="exampleEmail"
                     size="lg"
                     sm={4}
-                    className='mt-0 text-start'
+                    className='mt-0 text-start '
                 >
-                        <span  className="border px-3 py-2 rounded bg-secondary" >
+                        <span  className="border px-3 py-1 rounded align-middle bg-secondary d-none d-sm-inline" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#f8f9fa"
                                  className="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>

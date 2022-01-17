@@ -1,10 +1,12 @@
 import React, {FC} from 'react';
-import { useParams } from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {ContactActionTypes, IUser} from "../types/types";
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import { Card, CardBody, CardLink, CardSubtitle,  CardTitle } from 'reactstrap';
+import {Button, Card, CardBody, CardLink, CardSubtitle, CardTitle} from 'reactstrap';
 import {ModalAdd} from "../components/Modal";
-import EditButton from "../components/EditButton";
+import EditButton from "../components/buttons/EditButton";
+import {CONTACTS_ROUTE} from "../utils/consts";
+import BackButton from "../components/buttons/BackButton";
 interface AboutProps{
     user: IUser;
 }
@@ -13,10 +15,10 @@ interface ParamTypes  {
 }
 
 const About: FC<AboutProps> = ({user}) => {
+    const history = useHistory();
     const {id} = useParams<ParamTypes>();
     const contacts = useTypedSelector(state => state.contact.contacts)
     const item = contacts.filter(item=>item.id===Number(id))
-    console.log(item)
     return (
         <div className='container p-5'>
             <Card className='p-5'>
@@ -48,16 +50,19 @@ const About: FC<AboutProps> = ({user}) => {
                             <p>Name: </p><p>Surname :</p><p className=''>Phone: </p>
                         </div>
                         <div >
-                            <p><strong>{item[0].name}</strong> </p>
-                            <p><strong>{item[0].username}</strong>  </p>
-                            <p><strong>{item[0].phone}</strong>  </p>
+                            <p><strong>{item[0].name? item[0].name: '-'}</strong> </p>
+                            <p><strong>{item[0].username? item[0].username: '-'}</strong>  </p>
+                            <p><strong>{item[0].phone? item[0].phone: '-'}</strong>  </p>
                         </div>
 
                     </div>
 
                 </CardBody>
-                <CardBody className='d-flex justify-content-start' >
-                    <CardLink href="#" className='d-flex flex-column  align-items-center'>
+                <CardBody className='d-flex justify-content-between' >
+                    <CardLink className='d-flex flex-column align-items-center' onClick={()=>{history.push(CONTACTS_ROUTE)}}>
+                        <BackButton/>
+                    </CardLink>
+                    <CardLink href="#" className='d-flex flex-column  align-items-center' >
                         <ModalAdd
                             id={item[0].id}
                             fname={item[0].name}
@@ -65,9 +70,12 @@ const About: FC<AboutProps> = ({user}) => {
                             phone={item[0].phone}
                             img={item[0].img}
                             dispatch_type ={ContactActionTypes.EDIT_CONTACTS}
+                            action='Edit contact'
                         ><EditButton/></ModalAdd>
 
+                        {/*<Button className='align-self-end'>Back</Button>*/}
                     </CardLink>
+
                 </CardBody>
             </Card>
 

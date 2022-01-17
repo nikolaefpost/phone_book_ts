@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import UserList from "../components/UserList";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {ModalAdd} from '../components/Modal'
-import AddButton from "../components/AddButton";
+import AddButton from "../components/buttons/AddButton";
 import {ContactActionTypes} from "../types/types";
 import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import Search from "../components/Search";
@@ -11,7 +11,6 @@ const Contacts = () => {
     const storeContacts = useTypedSelector(state => state.contact)
     const [contacts, setContacts] = useState(storeContacts.contacts)
     const [search, setSearch] = useState('')
-    console.log(search)
     useEffect(()=>{
         setContacts(storeContacts.contacts)
     },[storeContacts])
@@ -28,14 +27,14 @@ const Contacts = () => {
 
 
     return (<>
-        <div className='container mt-2 p-5 ' >
+        <div className='container  p-5 p-sm-0 ' style={{marginTop: '85px'}}>
 
             {!storeContacts.error && <Search
                 search={search}
                 setSearch={setSearch}
             />}
             <UserList contacts={contacts} />
-            {!storeContacts.error &&<ModalAdd dispatch_type={ContactActionTypes.ADD_CONTACTS}><AddButton/></ModalAdd>}
+            {!storeContacts.error &&<ModalAdd action='Add contact' dispatch_type={ContactActionTypes.ADD_CONTACTS}><AddButton/></ModalAdd>}
         </div>
 
         </>

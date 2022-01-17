@@ -10,6 +10,7 @@ interface ModalProps{
     phone?: number|string
     img?: string|null|ArrayBuffer
     dispatch_type: string
+    action: string
 }
 export  const ModalAdd: FC<ModalProps> = (props) => {
     const dispatch = useDispatch();
@@ -18,7 +19,6 @@ export  const ModalAdd: FC<ModalProps> = (props) => {
     const [number, setNumber] = useState<number|string>(props.phone||0)
     const [foto, setFoto] = useState<string|null|ArrayBuffer>(null)
     const [open, setOpen] = useState<boolean>(false)
-    console.log(open)
 
     const addContact = (contact:IUser): void=>{
 
@@ -65,7 +65,7 @@ export  const ModalAdd: FC<ModalProps> = (props) => {
                             })
                         }}
                     >
-                        Add contact
+                        {props.action}
                     </Button>
                     {' '}
                     <Button onClick={() => setOpen(false)}>
