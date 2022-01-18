@@ -1,4 +1,4 @@
-import { ContactReducer } from "../store/reduser/contactReduser";
+import { ContactReducer } from "../store/reduser/contactReducer";
 import { ContactActionTypes, ContactState, IUser} from "../types/types"
 
 
