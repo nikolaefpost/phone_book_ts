@@ -4,8 +4,6 @@ import axios from "axios";
 
 export const fetchContacts = () => {
     return async (dispatch: Dispatch<ContactAction>) => {
-        console.log(dispatch)
-
         try {
             dispatch({type: ContactActionTypes.FETCH_CONTACTS})
             const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users')

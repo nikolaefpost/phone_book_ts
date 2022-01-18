@@ -31,7 +31,7 @@ const About: FC<AboutProps> = ({user}) => {
                         tag="h6"
                     >
 
-                        {item[0].img ? <img  className='rounded' src={(item[0].img).toString()}
+                        {item[0].img ? <img  className='rounded' alt='contact foto' src={(item[0].img).toString()}
                                          style={{width: '100px', height: '100px'}}/>:
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="#6c757d"

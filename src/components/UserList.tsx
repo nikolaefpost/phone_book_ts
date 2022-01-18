@@ -24,7 +24,7 @@ const UserList: FC<UserListProps> = (contacts) => {
                             className='d-flex justify-content-center align-items-center'
                         >
                             <div className='bg-secondary rounded me-3'>
-                                {user.img ? <img className='rounded' src={(user.img).toString()}
+                                {user.img ? <img className='rounded' alt='contact foto' src={(user.img).toString()}
                                                  style={{width: '36px', height: '36px'}}/>:
                                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#f8f9fa"
                                          className="bi bi-person-fill" viewBox="0 0 16 16">

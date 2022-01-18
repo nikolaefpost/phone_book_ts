@@ -12,7 +12,7 @@ const Contacts = () => {
     const [search, setSearch] = useState('')
     useEffect(()=>{
         setContacts(storeContacts.contacts)
-    },[storeContacts])
+    },[storeContacts.contacts])
     useEffect(()=>{
         if(search !== '' ) {
             setContacts(() => {

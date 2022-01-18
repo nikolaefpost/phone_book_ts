@@ -139,4 +139,4 @@ describe('Reducer test', ()=>{
 
 })
 
-// npm run test:watch1
+// npm run test:watch
