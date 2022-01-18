@@ -4,7 +4,6 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {ModalAdd} from '../components/Modal'
 import AddButton from "../components/buttons/AddButton";
 import {ContactActionTypes} from "../types/types";
-import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import Search from "../components/Search";
 
 const Contacts = () => {

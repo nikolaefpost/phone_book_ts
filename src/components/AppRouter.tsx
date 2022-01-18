@@ -4,7 +4,7 @@ import { routes } from '../routes';
 import { HOME_ROUTE } from '../utils/consts';
 
 
-const AppRouter = () => {
+const AppRouter: React.FC = () => {
     return (
         <Switch>
             {routes.map(({path, Component})=>

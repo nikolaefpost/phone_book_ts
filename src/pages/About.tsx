@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import {ContactActionTypes, IUser} from "../types/types";
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {Button, Card, CardBody, CardLink, CardSubtitle, CardTitle} from 'reactstrap';
+import { Card, CardBody, CardLink, CardSubtitle, CardTitle} from 'reactstrap';
 import {ModalAdd} from "../components/Modal";
 import EditButton from "../components/buttons/EditButton";
 import {CONTACTS_ROUTE} from "../utils/consts";
@@ -72,8 +72,6 @@ const About: FC<AboutProps> = ({user}) => {
                             dispatch_type ={ContactActionTypes.EDIT_CONTACTS}
                             action='Edit contact'
                         ><EditButton/></ModalAdd>
-
-                        {/*<Button className='align-self-end'>Back</Button>*/}
                     </CardLink>
 
                 </CardBody>

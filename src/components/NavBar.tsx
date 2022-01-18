@@ -9,13 +9,10 @@ import Error from "../pages/Error";
 
 const NavBar = () => {
     const [navbar, setNavbar] = useState(false)
-    const contacts = useTypedSelector(state => state.contact)
+    const {error, loading} = useTypedSelector(state => state.contact)
     const history = useHistory();
-    const {fetchContacts} = useActions()
-    const loadContact = () => {
-        fetchContacts()
-    }
-    if (contacts.loading) {
+
+    if (loading) {
         return( <Spinner
                     color="secondary"
                     size=""
@@ -23,7 +20,7 @@ const NavBar = () => {
                     Loading...
                 </Spinner>)
     }
-    if (contacts.error) {
+    if (error) {
         return <Error/>
     }
     return (

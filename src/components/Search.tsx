@@ -1,15 +1,17 @@
 import React, {FC} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import { fetchContacts } from '../store/action_creators/contacts';
-import {useActions} from "../hooks/useActions";
+// import {useActions} from "../hooks/useActions";
+import {useDispatch} from "react-redux";
 interface FormProps{
     search: string
     setSearch: (search: string) => void
 }
 const Search: FC<FormProps> = ({search, setSearch}) => {
-    const {fetchContacts} = useActions()
+    // const {fetchContacts } = useActions()
+    const dispatch = useDispatch()
     const loadContact = () => {
-        fetchContacts()
+        dispatch(fetchContacts())
     }
     return (
         <Form>
