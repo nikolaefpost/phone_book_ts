@@ -138,6 +138,16 @@ module.exports = {
 
   // The test environment that will be used for testing
   testEnvironment: "jsdom",
+  preset: 'ts-jest',
+  testMatch: ["**/__tests__/**/*.ts?(x)", "**/?(*.)+(test).ts?(x)"],
+  transform: {
+    "^.+\\.(js|ts)$": "ts-jest",
+  },
+  transformIgnorePatterns: [
+    "/node_modules/(?![@autofiy/autofiyable|@autofiy/property]).+\\.js$",
+    "/node_modules/(?![@autofiy/autofiyable|@autofiy/property]).+\\.ts$",
+    "/node_modules/(?![@autofiy/autofiyable|@autofiy/property]).+\\.tsx$",
+  ],
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
