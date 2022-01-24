@@ -21,29 +21,6 @@ export  const ModalAdd: FC<ModalProps> = (props) => {
     console.log(foto)
     const [open, setOpen] = useState<boolean>(false)
 
-    class User {
-
-        private name: string;
-        age: number;
-        constructor(userName: typeof name, userAge: number) {
-
-            this.name = userName;
-            this.age = userAge;
-        }
-        print(name: string){
-            this.name = name
-
-        }
-    }
-    class UserE extends User{
-
-    }
-
-    let tom = new UserE("Tom", 34);
-    let pr = tom.print.bind(tom)
-    pr('Ed')
-
-    console.log(tom);
 
     const addContact = (contact:IUser): void=>{
 
