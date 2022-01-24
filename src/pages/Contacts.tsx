@@ -10,6 +10,7 @@ const Contacts = () => {
     const storeContacts = useTypedSelector(state => state.contact)
     const [contacts, setContacts] = useState(storeContacts.contacts)
     const [search, setSearch] = useState('')
+
     useEffect(()=>{
         setContacts(storeContacts.contacts)
     },[storeContacts.contacts])

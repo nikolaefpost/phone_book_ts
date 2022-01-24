@@ -24,7 +24,7 @@ export interface IUser{
     // email: string;
     // address: IAddress
     phone: string| number;
-    img?: string|null|ArrayBuffer;
+    img?: string|null;
     // website: string;
     // company: ICompany
 }

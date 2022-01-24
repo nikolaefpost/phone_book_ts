@@ -7,7 +7,7 @@ interface FormProps{
     setSurname: (surname: string) => void
     number: number|string
     setNumber: (number: number|'') => void
-    setFoto: (foto: string|null|ArrayBuffer) => void
+    setFoto: (foto: string|null) => void
 
 }
 
@@ -41,11 +41,15 @@ const FormAddContact: FC<FormProps> = ({
         }
         let fReader = new FileReader();
         fReader.readAsDataURL(e.currentTarget.files[0]);
+        fReader.onerror = function(event) {
+            alert("Failed to read file!\n\n" + fReader.error);
+        };
         fReader.onloadend = function(event){
+            // setFoto(event.target!.result as string | null)
             if ( event.target == null ) {
                 throw new Error("Error readAsDataURL");
             }
-            setFoto(event.target.result)
+            setFoto(event.target.result as string | null)
         }
     };
     return (
