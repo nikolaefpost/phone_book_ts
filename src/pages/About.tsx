@@ -1,20 +1,18 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {useHistory, useParams} from 'react-router-dom';
-import {ContactActionTypes, IUser} from "../types/types";
+import {ContactActionTypes} from "../types/types";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import { Card, CardBody, CardLink, CardSubtitle, CardTitle} from 'reactstrap';
 import {ModalAdd} from "../components/Modal";
 import {CONTACTS_ROUTE} from "../utils/consts";
 import ButtonsCombine from "../components/ButtonsCombine";
 import UserBigSvg from "../svg/UserBigSvg";
-interface AboutProps{
-    user: IUser;
-}
+
 interface ParamTypes  {
     id: string;
 }
 
-const About: FC<AboutProps> = ({user}) => {
+const About: React.FC= () => {
     const history = useHistory();
     let {id} = useParams<ParamTypes>();
 

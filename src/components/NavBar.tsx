@@ -6,7 +6,7 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import Error from "../pages/Error";
 
 
-const NavBar = () => {
+const NavBar: React.FC = () => {
     const [navbar, setNavbar] = useState(false)
     const {error, loading} = useTypedSelector(state => state.contact)
     const history = useHistory();

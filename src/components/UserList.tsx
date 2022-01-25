@@ -19,10 +19,7 @@ const UserList: FC<UserListProps> = (contacts) => {
                 {contacts.contacts.map(user =>
                     <div key={user.id} className='d-flex justify-content-between align-items-center'>
                         <figure
-                            onClick={() => {
-                                history.push(ABOUT_ROUTE + '/' + user.id)
-                                sessionStorage.setItem('id', user.id.toString());
-                            }}
+                            onClick={() => history.push(ABOUT_ROUTE + '/' + user.id)}
                             className='d-flex justify-content-center align-items-center'
                         >
                             <div className='bg-secondary rounded me-3' style={{width: '36px', height: '36px', overflow: 'hidden'}}>
