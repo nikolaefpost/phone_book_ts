@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import UserList from "../components/UserList";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {ModalAdd} from '../components/Modal'
-import AddButton from "../components/buttons/AddButton";
 import {ContactActionTypes} from "../types/types";
 import Search from "../components/Search";
+import AddSvg from "../svg/AddSvg";
 
 const Contacts = () => {
     const storeContacts = useTypedSelector(state => state.contact)
@@ -34,7 +34,8 @@ const Contacts = () => {
                 setSearch={setSearch}
             />}
             <UserList contacts={contacts} />
-            {!storeContacts.error &&<ModalAdd action='Add contact' dispatch_type={ContactActionTypes.ADD_CONTACTS}><AddButton/></ModalAdd>}
+            {/*{storeContacts.error &&<ModalAdd action='Add contact' dispatch_type={ContactActionTypes.ADD_CONTACTS}><AddButton/></ModalAdd>}*/}
+            <ModalAdd action='Add contact' dispatch_type={ContactActionTypes.ADD_CONTACTS}><AddSvg/></ModalAdd>
         </div>
 
         </>

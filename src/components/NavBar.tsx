@@ -1,6 +1,6 @@
-import React, { useState} from 'react';
-import { useHistory } from 'react-router-dom';
-import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Spinner } from 'reactstrap';
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Spinner} from 'reactstrap';
 import {ABOUT_EMPTY_ROUTE, CONTACTS_ROUTE, ERROR_ROUTE, HOME_ROUTE} from "../utils/consts";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import Error from "../pages/Error";
@@ -12,18 +12,16 @@ const NavBar = () => {
     const history = useHistory();
 
     if (loading) {
-        return( <Spinner
-                    color="secondary"
-                    size=""
-                >
-                    Loading...
-                </Spinner>)
+        return (
+            <Spinner color="secondary" size="">
+                Loading...
+            </Spinner>
+        )
     }
     if (error) {
         return <Error/>
     }
     return (
-        <div className=''>
             <Navbar
                 color="dark"
                 container="xl"
@@ -31,14 +29,15 @@ const NavBar = () => {
                 expand="md"
                 fixed="top"
                 light
-
             >
-                <NavbarBrand onClick={()=>{
-                                    history.push(HOME_ROUTE)
-                                }}>
+                <NavbarBrand onClick={() => {
+                    history.push(HOME_ROUTE)
+                }}>
                     PHONE BOOK
                 </NavbarBrand>
-                <NavbarToggler onClick={()=>{setNavbar((pre)=>!pre)}} />
+                <NavbarToggler onClick={() => {
+                    setNavbar((pre) => !pre)
+                }}/>
                 <Collapse navbar isOpen={navbar}>
                     <Nav
                         className="me-auto"
@@ -46,18 +45,24 @@ const NavBar = () => {
                     >
                         <NavItem>
                             <NavLink
-                                onClick={()=>{history.push(CONTACTS_ROUTE)}}
+                                onClick={() => {
+                                    history.push(CONTACTS_ROUTE)
+                                }}
                             >
                                 CONTACTS
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink onClick={()=>{history.push(ABOUT_EMPTY_ROUTE)}}>
+                            <NavLink onClick={() => {
+                                history.push(ABOUT_EMPTY_ROUTE)
+                            }}>
                                 ABOUT
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink onClick={()=>{history.push(ERROR_ROUTE)}}>
+                            <NavLink onClick={() => {
+                                history.push(ERROR_ROUTE)
+                            }}>
                                 ERROR 404
                             </NavLink>
                         </NavItem>
@@ -65,7 +70,6 @@ const NavBar = () => {
                     </Nav>
                 </Collapse>
             </Navbar>
-        </div>
     );
 };
 

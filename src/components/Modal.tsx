@@ -1,43 +1,48 @@
 import React, {FC, useState} from 'react';
-import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import { Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import FormAddContact from "./FormAddContact";
-import { IUser} from "../types/types";
+import {IUser} from "../types/types";
 import {useDispatch} from "react-redux";
-interface ModalProps{
+
+interface ModalProps {
     id?: number
     fname?: string
     username?: string
-    phone?: number|string
-    img?: string|null
+    phone?: number | string
+    img?: string | null
     dispatch_type: string
     action: string
 }
-export  const ModalAdd: FC<ModalProps> = (props) => {
+
+export const ModalAdd: FC<ModalProps> = (props) => {
     const dispatch = useDispatch();
     const [name, setName] = useState<string>(props.fname || '')
-    const [surname, setSurname] = useState<string>(props.username ||'')
-    const [number, setNumber] = useState<number|string>(props.phone||0)
-    const [foto, setFoto] = useState<string|null>(null)
-    console.log(foto)
+    const [surname, setSurname] = useState<string>(props.username || '')
+    const [number, setNumber] = useState<number | string>(props.phone || 0)
+    const [foto, setFoto] = useState<string | null>(null)
     const [open, setOpen] = useState<boolean>(false)
 
 
-    const addContact = (contact:IUser): void=>{
-
+    const addContact = (e:React.FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+        const contact: IUser = {
+            id: props.id ? props.id : (new Date()).getTime(),
+            name: name,
+            username: surname,
+            phone: number,
+            img: foto ? foto : props.img
+        }
         dispatch({type: props.dispatch_type, payload: contact})
         setOpen(false)
     }
     return (
         <div className='d-flex justify-content-end'>
-            <div
-                onClick={() => setOpen(true)}
-
-            >
+            <div onClick={() => setOpen(true)}>
                 {props.children}
             </div>
             <Modal
                 centered
-                isOpen ={open}
+                isOpen={open}
                 toggle={() => setOpen(false)}
             >
                 <ModalHeader toggle={() => setOpen(false)}>
@@ -52,27 +57,13 @@ export  const ModalAdd: FC<ModalProps> = (props) => {
                         number={number}
                         setNumber={setNumber}
                         setFoto={setFoto}
+                        action={props.action}
+                        addContact={addContact}
+                        setOpen={setOpen}
                     />
                 </ModalBody>
-                <ModalFooter>
-                    <Button
-                        color="primary"
-                        onClick={()=>{
-                            addContact({
-                                id: props.id? props.id : (new Date()).getTime(),
-                                name: name,
-                                username: surname,
-                                phone: number,
-                                img: foto?  foto: props.img
-                            })
-                        }}
-                    >
-                        {props.action}
-                    </Button>
-                    {' '}
-                    <Button onClick={() => setOpen(false)}>
-                        Cancel
-                    </Button>
+                <ModalFooter className='justify-content-start'>
+                    <span className='text-danger'>*</span><span>Required fields</span>
                 </ModalFooter>
             </Modal>
         </div>

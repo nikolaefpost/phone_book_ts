@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddButton: React.FC = () => {
+const AddSvg = () => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#0d6efd"
@@ -12,4 +12,4 @@ const AddButton: React.FC = () => {
     );
 };
 
-export default AddButton;
+export default AddSvg;
