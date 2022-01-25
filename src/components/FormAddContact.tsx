@@ -85,7 +85,7 @@ const FormAddContact: FC<FormProps> = ({
                     Phone number format (XXX) XXX-XX-XX <span className='text-danger'>*</span>
                 </Label>
                 <Input
-                    placeholder="Phone format (XXX) XXX-XX-XX"
+                    placeholder="(XXX) XXX-XX-XX"
                     type="tel"
                     value={number}
                     onChange={onChangePhone}

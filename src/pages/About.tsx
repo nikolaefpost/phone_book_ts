@@ -16,22 +16,26 @@ interface ParamTypes  {
 
 const About: FC<AboutProps> = ({user}) => {
     const history = useHistory();
-    const {id} = useParams<ParamTypes>();
-    const contacts = useTypedSelector(state => state.contact.contacts)
-    const item = contacts.filter(item=>item.id===Number(id))
+    let {id} = useParams<ParamTypes>();
+
+    let contacts = useTypedSelector(state => state.contact.contacts)
+
+    if(contacts.length ===0) history.push(CONTACTS_ROUTE)
+    else contacts = contacts.filter(elem=>elem.id===Number(id))
+
     return (
         <div className='container p-5'>
-            <Card className='p-5'>
+            {contacts.length !==0 && <Card className='p-5'>
                 <CardBody className=''>
                     <CardTitle tag="h5" className='mb-3'>
-                        {item[0].name}
+                        {contacts[0].name}
                     </CardTitle>
                     <CardSubtitle
                         className="mb-2 "
                         tag="h6"
                     >
-                        {item[0].img ? <img  className='rounded' alt='contact foto' src={(item[0].img).toString()}
-                                         style={{ height: '100px'}}/>: <UserBigSvg/>}
+                        {contacts[0].img ? <img className='rounded' alt='contact foto' src={(contacts[0].img).toString()}
+                                            style={{height: '100px'}}/> : <UserBigSvg/>}
                     </CardSubtitle>
                 </CardBody>
 
@@ -40,27 +44,29 @@ const About: FC<AboutProps> = ({user}) => {
                         <div className='me-3'>
                             <p>Name: </p><p>Surname :</p><p className=''>Phone: </p>
                         </div>
-                        <div >
-                            <p><strong>{item[0].name? item[0].name: '-'}</strong> </p>
-                            <p><strong>{item[0].username? item[0].username: '-'}</strong>  </p>
-                            <p><strong>{item[0].phone? item[0].phone: '-'}</strong>  </p>
+                        <div>
+                            <p><strong>{contacts[0].name ? contacts[0].name : '-'}</strong></p>
+                            <p><strong>{contacts[0].username ? contacts[0].username : '-'}</strong></p>
+                            <p><strong>{contacts[0].phone ? contacts[0].phone : '-'}</strong></p>
                         </div>
 
                     </div>
 
                 </CardBody>
-                <CardBody className='d-flex justify-content-between' >
-                    <CardLink className='d-flex flex-column align-items-center' onClick={()=>{history.push(CONTACTS_ROUTE)}}>
+                <CardBody className='d-flex justify-content-between'>
+                    <CardLink className='d-flex flex-column align-items-center' onClick={() => {
+                        history.push(CONTACTS_ROUTE)
+                    }}>
                         <ButtonsCombine title='Back'><i className="bi bi-arrow-return-left"></i></ButtonsCombine>
                     </CardLink>
-                    <CardLink  className='d-flex flex-column  align-items-center' >
+                    <CardLink className='d-flex flex-column  align-items-center'>
                         <ModalAdd
-                            id={item[0].id}
-                            fname={item[0].name}
-                            username={item[0].username}
-                            phone={item[0].phone}
-                            img={item[0].img}
-                            dispatch_type ={ContactActionTypes.EDIT_CONTACTS}
+                            id={contacts[0].id}
+                            fname={contacts[0].name}
+                            username={contacts[0].username}
+                            phone={contacts[0].phone}
+                            img={contacts[0].img}
+                            dispatch_type={ContactActionTypes.EDIT_CONTACTS}
                             action='Edit contact'
                         >
                             <ButtonsCombine title='Edite'><i className="bi bi-pencil-square"></i></ButtonsCombine>
@@ -68,7 +74,7 @@ const About: FC<AboutProps> = ({user}) => {
                     </CardLink>
 
                 </CardBody>
-            </Card>
+            </Card>}
 
         </div>
     );

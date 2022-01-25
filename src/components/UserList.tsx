@@ -21,6 +21,7 @@ const UserList: FC<UserListProps> = (contacts) => {
                         <figure
                             onClick={() => {
                                 history.push(ABOUT_ROUTE + '/' + user.id)
+                                sessionStorage.setItem('id', user.id.toString());
                             }}
                             className='d-flex justify-content-center align-items-center'
                         >

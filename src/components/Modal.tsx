@@ -18,7 +18,7 @@ export const ModalAdd: FC<ModalProps> = (props) => {
     const dispatch = useDispatch();
     const [name, setName] = useState<string>(props.fname || '')
     const [surname, setSurname] = useState<string>(props.username || '')
-    const [number, setNumber] = useState<number | string>(props.phone || 0)
+    const [number, setNumber] = useState<number | string>(props.phone || '')
     const [foto, setFoto] = useState<string | null>(null)
     const [open, setOpen] = useState<boolean>(false)
 
