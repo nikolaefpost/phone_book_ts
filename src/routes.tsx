@@ -1,9 +1,17 @@
-import {ABOUT_EMPTY_ROUTE, ABOUT_ROUTE, CONTACTS_ROUTE, ERROR_ROUTE, HOME_ROUTE} from "./utils/consts";
+import {ABOUT_EMPTY_ROUTE, ABOUT_ROUTE, CONTACTS_ROUTE, ERROR_ROUTE, HOME_ROUTE, LOGIN_ROUTE} from "./utils/consts";
 import Home from "./pages/Home";
 import Contacts from "./pages/Contacts";
 import About from "./pages/About";
 import Error from "./pages/Error";
 import AboutEmpty from "./pages/ABOUT_EMPTY";
+import Login from "./pages/Login";
+
+export const pablicRoutes = [
+    {
+        path: LOGIN_ROUTE,
+        Component: Login
+    }
+]
 
 export const routes = [
     {
