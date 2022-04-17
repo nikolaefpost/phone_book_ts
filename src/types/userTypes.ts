@@ -1,10 +1,10 @@
-// export interface IUser{
-//     id: number;
-//     name: string;
-//     username: string;
-//     phone: string| number;
-//     img?: string|null;
-// }
+export interface IUser{
+    name: string;
+    email: string;
+    password: string| number;
+    photoURL?: string|null;
+    isGoogle: boolean
+}
 
 export interface UserState {
     user: any
@@ -15,6 +15,7 @@ export interface UserState {
 export enum UserActionTypes {
     FETCH_USER = "FETCH_USER",
     FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS",
+    INPUT_USER = "INPUT_USER",
     DELETE_USER = "DELETE_USER",
     FETCH_USER_ERROR = 'FETCH_USER_ERROR',
 }
@@ -25,6 +26,11 @@ export interface FetchUserAction {
 
 export interface FetchUserSuccessAction {
     type: UserActionTypes.FETCH_USER_SUCCESS;
+    payload: any;
+}
+
+export interface InputUserAction {
+    type: UserActionTypes.INPUT_USER;
     payload: any;
 }
 

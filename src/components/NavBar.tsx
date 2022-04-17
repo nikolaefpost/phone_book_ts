@@ -88,7 +88,7 @@ const NavBar: React.FC = () => {
                         {storeUser.user.displayName}
                     </span>
 
-                        <img className="w-25 rounded"  src={storeUser.user.photoURL}/>
+                        <img className={styles.user_logo}  src={storeUser.user.photoURL}/>
 
                 </div>
             </Collapse>

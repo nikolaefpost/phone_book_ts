@@ -12,7 +12,7 @@ export const fetchUser = () => {
             const provider = new firebase.auth.GoogleAuthProvider()
             const {user} = await auth_redux.signInWithPopup(provider)
             console.log(user)
-            if (user) dispatch({type: UserActionTypes.FETCH_USER_SUCCESS, payload: user.multiFactor })
+            user && dispatch({type: UserActionTypes.FETCH_USER_SUCCESS, payload: user.multiFactor })
         } catch (e){
             dispatch({
                 type: UserActionTypes.FETCH_USER_ERROR,
