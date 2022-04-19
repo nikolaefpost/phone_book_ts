@@ -23,16 +23,16 @@ const Search: FC<FormProps> = ({search, setSearch}) => {
                 <Col sm={4}>
                     <Input
                         bsSize="lg"
-                        id="exampleEmail"
-                        name="email"
+                        id="search"
+                        name="search"
                         placeholder="name"
-                        type="email"
+                        type="text"
                         value={search}
                         onChange={(e)=>setSearch(e.currentTarget.value.toLowerCase())}
                     />
                 </Col>
                 <Label
-                    for="exampleEmail"
+                    for="search"
                     size="lg"
                     sm={4}
                     className='mt-0 text-start '

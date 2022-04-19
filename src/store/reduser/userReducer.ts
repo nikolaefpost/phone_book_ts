@@ -28,6 +28,10 @@ export const UserReducer = (state = initialState, action: UserAction): UserState
             return {loading: true, error: action.payload, user: {}}
         case UserActionTypes.DELETE_USER:
             return {loading: false, error: null, user: null}
+        case UserActionTypes.INPUT_USER:
+            return {loading: false, error: null, user: action.payload}
+        case UserActionTypes.LOAD_USER_LOGO:
+            return {loading: false, error: null, user: {...state.user ,photoURL: action.payload}}
         default:
             return state
     }

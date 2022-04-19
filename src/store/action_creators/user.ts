@@ -22,3 +22,37 @@ export const fetchUser = () => {
 
     }
 }
+
+export const loadUserLogo = (foto:Blob) => {
+    return async (dispatch: Dispatch<UserAction>) => {
+        let fReader = new FileReader();
+        fReader.readAsDataURL(foto);
+        fReader.onerror = function (event) {
+            alert("Failed to read file!\n\n" + fReader.error);
+        };
+        fReader.onloadend = function (event) {
+            if (event.target == null) {
+                throw new Error("Error readAsDataURL");
+            }
+            dispatch({type: UserActionTypes.LOAD_USER_LOGO, payload: event.target.result as string })
+        }
+
+    }
+}
+
+// export const loadUserLogo = () = {
+//     return async (dispatch: Dispatch<UserAction>) => {
+//
+//         let fReader = new FileReader();
+//         fReader.readAsDataURL(e.currentTarget.files[0]);
+//         fReader.onerror = function (event) {
+//             alert("Failed to read file!\n\n" + fReader.error);
+//         };
+//         fReader.onloadend = function (event) {
+//             if (event.target == null) {
+//                 throw new Error("Error readAsDataURL");
+//             }
+//             setFoto(event.target.result as string | null)
+//         }
+//     }
+// }

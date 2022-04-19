@@ -1,5 +1,5 @@
 export interface IUser{
-    name: string;
+    displayName: string;
     email: string;
     password: string| number;
     photoURL?: string|null;
@@ -18,6 +18,7 @@ export enum UserActionTypes {
     INPUT_USER = "INPUT_USER",
     DELETE_USER = "DELETE_USER",
     FETCH_USER_ERROR = 'FETCH_USER_ERROR',
+    LOAD_USER_LOGO = 'LOAD_USER_LOGO'
 }
 
 export interface FetchUserAction {
@@ -31,7 +32,7 @@ export interface FetchUserSuccessAction {
 
 export interface InputUserAction {
     type: UserActionTypes.INPUT_USER;
-    payload: any;
+    payload: IUser;
 }
 
 export interface FetchUserErrorAction {
@@ -41,9 +42,14 @@ export interface FetchUserErrorAction {
 
 export interface DeleteUserAction {
     type: UserActionTypes.DELETE_USER
-    payload: object;
+}
+
+export interface LoadUserLogoAction {
+    type: UserActionTypes.LOAD_USER_LOGO
+    payload: string;
 }
 
 
 
-export type UserAction = FetchUserAction | FetchUserSuccessAction | FetchUserErrorAction | DeleteUserAction;
+export type UserAction = FetchUserAction | FetchUserSuccessAction | FetchUserErrorAction | DeleteUserAction
+    | InputUserAction | LoadUserLogoAction;

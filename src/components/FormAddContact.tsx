@@ -1,33 +1,36 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
+import {useDispatch} from "react-redux";
+import {IUser} from "../types/types";
 
 interface FormProps {
-    name: string
-    setName: (name: string) => void
-    surname: string
-    setSurname: (surname: string) => void
-    number: number | string
-    setNumber: (number: number | string) => void
-    setFoto: (foto: string | null) => void
+    id?: number
+    contact_name?: string
+    contact_username?: string
+    contact_phone?: number | string
+    contact_img?: string | null
+    dispatch_type: string
     action: string
-    addContact: (e:React.FormEvent<HTMLFormElement>) => void
-    setOpen: (open: boolean) => void
 
 }
 
 const FormAddContact: FC<FormProps> = ({
-                                           name,
-                                           setName,
-                                           surname,
-                                           setSurname,
-                                           number,
-                                           setNumber,
-                                           setFoto,
-                                           action,
-                                           addContact,
-                                           setOpen
-
+                                           id,
+                                           contact_name,
+                                           contact_username,
+                                           contact_phone,
+                                           contact_img,
+                                           dispatch_type,
+                                           action
                                        }) => {
+    const dispatch = useDispatch();
+    const [name, setName] = useState<string>(contact_name || '')
+    const [surname, setSurname] = useState<string>(contact_username || '')
+    const [number, setNumber] = useState<number | string>(contact_phone || '')
+    const [foto, setFoto] = useState<string | null>(null)
+    const [open, setOpen] = useState<boolean>(false)
+
+
     const onChangeName = (e: React.FormEvent<HTMLInputElement>): void => {
         setName(e.currentTarget.value);
     };
@@ -53,8 +56,21 @@ const FormAddContact: FC<FormProps> = ({
             setFoto(event.target.result as string | null)
         }
     };
+
+    const addContact = (e:React.FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+        const contact: IUser = {
+            id: id ? id : (new Date()).getTime(),
+            name: name,
+            username: surname,
+            phone: number,
+            img: foto ? foto : contact_img
+        }
+        dispatch({type: dispatch_type, payload: contact})
+        setOpen(false)
+    }
     return (
-        <Form onSubmit={(e)=> {
+        <Form onSubmit={(e) => {
             addContact(e)
         }}>
             <FormGroup>

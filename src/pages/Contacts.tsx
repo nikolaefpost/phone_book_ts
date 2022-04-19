@@ -5,6 +5,7 @@ import {ModalAdd} from '../components/Modal'
 import {ContactActionTypes} from "../types/types";
 import Search from "../components/Search";
 import AddSvg from "../svg/AddSvg";
+import FormAddContact from "../components/FormAddContact";
 
 const Contacts = () => {
     const storeContacts = useTypedSelector(state => state.contact)
@@ -35,7 +36,12 @@ const Contacts = () => {
             />}
             <UserList contacts={contacts} />
             {/*{storeContacts.error &&<ModalAdd action='Add contact' dispatch_type={ContactActionTypes.ADD_CONTACTS}><AddButton/></ModalAdd>}*/}
-            <ModalAdd action='Add contact' dispatch_type={ContactActionTypes.ADD_CONTACTS}><AddSvg/></ModalAdd>
+            <ModalAdd element={<AddSvg/>} title="Enter contact details, please.">
+                <FormAddContact
+                    action='Add contact'
+                    dispatch_type={ContactActionTypes.ADD_CONTACTS}
+                />
+            </ModalAdd>
         </div>
 
         </>

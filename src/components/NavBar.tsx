@@ -3,10 +3,13 @@ import {useHistory} from 'react-router-dom';
 import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Spinner} from 'reactstrap';
 import {ABOUT_EMPTY_ROUTE, CONTACTS_ROUTE, ERROR_ROUTE, HOME_ROUTE, LOGIN_ROUTE} from "../utils/consts";
 import {useTypedSelector} from "../hooks/useTypedSelector";
+import {FaRegUserCircle} from "react-icons/fa"
 import Error from "../pages/Error";
 import {useDispatch} from "react-redux";
 import {UserActionTypes} from "../types/userTypes";
-import styles from "./components.module.css"
+import styles from "./components.module.scss"
+import {ModalAdd} from "./Modal";
+import FormAddLogo from "./FormAddLogo";
 
 
 const NavBar: React.FC = () => {
@@ -83,12 +86,17 @@ const NavBar: React.FC = () => {
                     </NavItem>
 
                 </Nav>
-                <div>
+                <div className="d-flex justify-content-center align-items-center">
                     <span className="text-light me-2">
                         {storeUser.user.displayName}
                     </span>
+                    <ModalAdd
+                        element={!!storeUser.user.photoURL ? <img className={styles.user_logo} src={storeUser.user.photoURL}/>: <FaRegUserCircle className={styles.user_logo}/>}
+                        title = "Choose an image for the logo"
+                    >
+                        <FormAddLogo action="Add logo" dispatch_type={UserActionTypes.LOAD_USER_LOGO }/>
+                    </ModalAdd>
 
-                        <img className={styles.user_logo}  src={storeUser.user.photoURL}/>
 
                 </div>
             </Collapse>
